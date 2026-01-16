@@ -1,0 +1,174 @@
+{
+  "name": "coder-timer",
+  "displayName": "Coder Timer - Pomodoro & Countdown",
+  "description": "Stay focused and boost productivity with Pomodoro technique and countdown timers. Track your coding sessions, take proper breaks, and work smarter right from VS Code.",
+  "version": "1.0.0",
+  "publisher": "shiva-dev",
+  "author": {
+    "name": "Shiva (Sivaprasad Nidamanuri)",
+    "email": "imshiv@umich.edu",
+    "url": "https://github.com/imshiv-10"
+  },
+  "license": "MIT",
+  "icon": "media/icon-128.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imshiv-10/coder-timer"
+  },
+  "homepage": "https://github.com/imshiv-10/coder-timer#readme",
+  "bugs": {
+    "url": "https://github.com/imshiv-10/coder-timer/issues",
+    "email": "imshiv@umich.edu"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "countdown",
+    "productivity",
+    "focus",
+    "time management",
+    "break reminder",
+    "work timer",
+    "coding timer",
+    "task timer"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "coderTimer.start",
+        "title": "Coder Timer: Start/Resume Timer",
+        "icon": "$(play)"
+      },
+      {
+        "command": "coderTimer.pause",
+        "title": "Coder Timer: Pause Timer",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "coderTimer.stop",
+        "title": "Coder Timer: Stop Timer",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "coderTimer.reset",
+        "title": "Coder Timer: Reset Timer",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "coderTimer.setPomodoro",
+        "title": "Coder Timer: Switch to Pomodoro Mode"
+      },
+      {
+        "command": "coderTimer.setCountdown",
+        "title": "Coder Timer: Switch to Countdown Mode"
+      },
+      {
+        "command": "coderTimer.showSidebar",
+        "title": "Coder Timer: Show Timer Panel",
+        "icon": "$(clock)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "coder-timer",
+          "title": "Coder Timer",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "coder-timer": [
+        {
+          "type": "webview",
+          "id": "coderTimer.sidebar",
+          "name": "Timer"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Coder Timer",
+      "properties": {
+        "coderTimer.pomodoro.workDuration": {
+          "type": "number",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 120,
+          "description": "Pomodoro work session duration in minutes"
+        },
+        "coderTimer.pomodoro.shortBreak": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 30,
+          "description": "Short break duration in minutes"
+        },
+        "coderTimer.pomodoro.longBreak": {
+          "type": "number",
+          "default": 15,
+          "minimum": 5,
+          "maximum": 60,
+          "description": "Long break duration in minutes"
+        },
+        "coderTimer.pomodoro.sessionsBeforeLongBreak": {
+          "type": "number",
+          "default": 4,
+          "minimum": 2,
+          "maximum": 10,
+          "description": "Number of work sessions before a long break"
+        },
+        "coderTimer.countdown.defaultDuration": {
+          "type": "number",
+          "default": 10,
+          "minimum": 1,
+          "maximum": 180,
+          "description": "Default countdown duration in minutes"
+        },
+        "coderTimer.sound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notification when timer completes"
+        },
+        "coderTimer.sound.volume": {
+          "type": "number",
+          "default": 0.5,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Notification sound volume (for future use)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0",
+    "vsce": "^2.11.0"
+  },
+  "overrides": {
+    "undici": "5.28.0"
+  }
+}
